@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zxx">
+{% load static %}
+<head>
+    <title>reset Password</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta name="keywords" content="Poly Clinic Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+	SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola web design" />
+    <script>
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <!-- Custom Theme files -->
+    <link href="{% static 'index/css/styles.css' %}" type="text/css" rel="stylesheet" media="all">
+
+
+
+    <!-- font-awesome icons -->
+    <link href="css/fontawesome-all.min.css" rel="stylesheet">
+    <!-- //Custom Theme files -->
+    <!-- online-fonts -->
+    <link href="//fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+</head>
+
+<body>
+<br>
+
+
+	<div class="container-agille">
+		<div class="formBox level-login">
+                <h1>
+		Reset Password
+	</h1>
+			<div class="box loginBox">
+				<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reset Password</h3>
+				<form class="form" action="" method="post">
+					 {% csrf_token %}
+					<div class="f_row-2">
+						<input type="text" name="newpassword" class="input-field" placeholder="New Password"  required>
+					</div>
+					<div class="f_row-2 last">
+						<input type="text" name="cpassword" placeholder="confirm Password"  class="input-field" required>
+					</div>
+					<input class="submit-w3" type="submit" class="btn btn-defeault btn-send"  value="Set New Password">
+				</form>
+			</div>
+
+
+<script>
+						 function myFunction() {
+								  alert("success").then(response => {
+									window.location.href = 'MAIN/login.html';
+								  })
+								}
+</script>
+        </div>
+    </div>
+</body>
+</html>

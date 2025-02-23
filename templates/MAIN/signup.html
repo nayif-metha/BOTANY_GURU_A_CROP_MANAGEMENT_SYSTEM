@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+    {% load static %}
+  <head>
+      <title>Sign Up</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <link href="{% static 'MAIN/home/img/favicon.ico' %}" rel="icon">
+      <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+      <link rel="stylesheet" href="{% static 'MAIN/signup/css/style.css' %}">
+  </head>
+  <body class="img">
+    <section class="ftco-section">
+        <div class="container">
+              <div class="row justify-content-center">
+                  <div class="col-md-7 col-lg-5">
+                      <div class="login-wrap">
+                          <h3 class="text-center mb-4">Create Your Account</h3>
+                          <form action="addprofiledata" method="post" enctype="multipart/form-data" class="signup-form">
+                            {% csrf_token %}
+                            <div class="form-group mb-3">
+                                <label class="label" for="pic">Profile Picture</label>
+                                <input type="file" name="pic" class="form-control" required>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="label" for="idno">ID Number</label>
+                                <input type="number" name="idno" class="form-control" placeholder="Enter the ID NUMBER" required>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="label" for="name">Name</label>
+                                <input type="text" name="name" class="form-control" placeholder="Enter the NAME" required>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="label" for="address">Address</label>
+                                <input type="text" name="address" class="form-control" placeholder="Enter the ADDRESS" required>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="label" for="city">City</label>
+                                <select id="city" name="city" class="form-control" style="background-color: transparent; color: #212529; border: 1px solid #ced4da;">
+                                    {% for city in cities %}
+                                        <option value="{{ city }}" style="background-color: transparent; color: #212529;">{{ city }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="label" for="dropdown">Role</label>
+                                <select name="dropdown" id="dropdown" class="form-control" style="background-color: transparent; color: #212529; border: 1px solid #ced4da;">
+                                    
+                                    <option value="1" style="background-color: transparent; color: #212529;">FARMER</option>
+                                    <option value="2" style="background-color: transparent; color: #212529;">SHOP</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group mb-3">
+                                <label class="label" for="email">Email</label>
+                                <input type="email" name="email" class="form-control" placeholder="Enter the EMAIL" required>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="label" for="userid">Username</label>
+                                <input type="text" name="userid" class="form-control" placeholder="Enter the USER NAME" required>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="label" for="password0">Password</label>
+                                <input type="password" name="password0" class="form-control" placeholder="Enter the PASSWORD" required>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="label" for="password1">Confirm Password</label>
+                                <input type="password" name="password1" class="form-control" placeholder="CONFIRM PASSWORD" required>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="form-control btn btn-primary submit px-3">Sign Up</button>
+                            </div>
+                            <div class="form-group">
+                                <button type="reset" class="form-control btn btn-secondary px-3">Clear</button>
+                            </div>
+                        </form>
+                          <p>Already a member? <a href="login">Log In</a></p>
+                          <div class="form-group mb-3">
+                            <div id="result" class="alert alert-info text-center alert-dismissible fade show" role="alert" style="background-color: transparent; color: white; font-size: 18px; border: 1px solid #ced4da; display: flex; align-items: center; border-radius: 50px; font-family: 'Courier New', monospace;" >
+                                <span style="white-space: nowrap; text-overflow: ellipsis; display: inline-block; text-align: center;">
+                                    {{ msg }}
+                                </span>
+                            </div>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </section>
+
+      <script src="{% static 'MAIN/signup/js/jquery.min.js' %}"></script>
+      <script src="{% static 'MAIN/signup/js/popper.js' %}"></script>
+      <script src="{% static 'MAIN/signup/js/bootstrap.min.js' %}"></script>
+      <script src="{% static 'MAIN/signup/js/main.js' %}"></script>
+  </body>
+</html>

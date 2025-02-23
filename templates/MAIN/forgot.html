@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <title>Forgot Password</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <link href="{% static 'index/css/bootstrap.css' %}" type="text/css" rel="stylesheet" media="all">
+    <link href="{% static 'index/css/styles.css' %}" type="text/css" rel="stylesheet" media="all">
+    <link href="//fonts.googleapis.com/css?family=Lato:100,300,400,700" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container-agille">
+        <div class="formBox level-login">
+            <h1>Forgot Password</h1>
+            {% if messages %}
+                <div class="alert">
+                    {% for message in messages %}
+                        <p>{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <div class="box loginBox">
+                <h3>ENTER Your EMAIL</h3>
+                <form class="form" action="{% url 'forgot' %}" method="post">
+                    {% csrf_token %}
+                    <div class="f_row-2">
+                        <input type="email" name="email" class="input-field" placeholder="Enter your email" required>
+                    </div>
+                    <input class="submit-w3" type="submit" value="Send Email">
+                </form>
+            </div>
+            <a class="back-button" href="/">Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>
