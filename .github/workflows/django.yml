@@ -16,43 +16,21 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Install dependencies for building Python
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y build-essential libssl-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libffi-dev zlib1g-dev
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
 
-      - name: Download and install Python 3.6.13
+      - name: Build Docker image
         run: |
-          wget https://www.python.org/ftp/python/3.6.13/Python-3.6.13.tgz
-          tar -xzf Python-3.6.13.tgz
-          cd Python-3.6.13
-          ./configure --enable-optimizations
-          make -j $(nproc)
-          sudo make altinstall
-          cd ..
-
-
-      - name: Create virtual environment
-        run: |
-          python3.6 -m venv venv
-          echo "Virtual environment created."
-
-      - name: Activate virtual environment and install requirements
-        run: |
-          source venv/bin/activate
-          pip install -r requirements.txt
+          docker build -t my-django-app .
 
       - name: Run Django migrations
         run: |
-          source venv/bin/activate
-          python manage.py migrate
+          docker run --rm my-django-app python manage.py migrate
 
       - name: Run Django tests
         run: |
-          source venv/bin/activate
-          python manage.py test
+          docker run --rm my-django-app python manage.py test
 
       - name: Run Django development server
         run: |
-          source venv/bin/activate
-          python manage.py runserver 0.0.0.0:8000
+          docker run -d -p 8000:8000 my-django-app
