@@ -1,19 +1,6 @@
 
-seaborn==0.11.2
-Send2Trash==1.8.3
-simplejson==3.19.3
-six==1.17.0
-sklearn==0.0
-sniffio==1.2.0
-sqlparse==0.4.4
-terminado==0.12.1
-testpath==0.6.0
-threadpoolctl==3.1.0
-toml==0.10.2
-tomli==1.2.3
-torch==1.10.2
-torchaudio==0.10.2
-torchvision==0.11.3
+torch
+
 tornado==6.1
 traitlets==4.3.3
 txt2tags==3.7
