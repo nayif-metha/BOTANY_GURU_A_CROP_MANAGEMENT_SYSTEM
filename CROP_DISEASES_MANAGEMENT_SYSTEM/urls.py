@@ -39,6 +39,7 @@ urlpatterns = [
 
     
     path('addprofiledata', views.addprofiledata),
+    path('updateprofile', views.updateprofile),
     path('profiledata', views.profiledata),
     path('logindata', views.logindata),
     path('logoutdata', views.logoutdata),
