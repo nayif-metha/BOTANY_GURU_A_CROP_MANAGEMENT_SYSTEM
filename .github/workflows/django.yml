@@ -10,40 +10,7 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Install dependencies
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y wget build-essential libssl-dev libbz2-dev libreadline-dev libsqlite3-dev libffi-dev zlib1g-dev
-        
-        # Download the Python tarball
-        wget https://github.com/actions/python-versions/releases/download/3.6.13-99136/python-3.6.13-linux-20.04-x64.tar.gz
-        
-        # Extract the tarball
-        tar -xzf python-3.6.13-linux-20.04-x64.tar.gz
-        
-        # List the contents of the current directory to check if extraction was successful
-        ls -l
-        
-        # Check if the extracted directory exists
-        if [ -d "python-3.6.13" ]; then
-            echo "Directory python-3.6.13 exists."
-        else
-            echo "Directory python-3.6.13 does not exist."
-            # If the directory does not exist, list the contents of the extracted files
-            ls -l
-        fi
-
-        # Move the extracted directory if it exists
-        if [ -d "python-3.6.13" ]; then
-            sudo mv python-3.6.13 /usr/local/
-        else
-            echo "Failed to move python-3.6.13"
-        fi
-
-        # Create symlinks for python3 and pip3
-        sudo ln -sf /usr/local/python-3.6.13/bin/python3 /usr/bin/python3  # Create symlink for python3
-        sudo ln -sf /usr/local/python-3.6.13/bin/pip3 /usr/bin/pip3  # Create symlink for pip3
-
+   
     - name: Install Python packages
       run: |
         pip3 install --upgrade pip
