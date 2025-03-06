@@ -19,8 +19,7 @@ ENV PATH /opt/conda/envs/myenv/bin:$PATH
 # Copy the rest of the application code into the container
 COPY . .
 
-# Expose the port that the application will run on
-EXPOSE 8000
+
 
 # Command to run the application
 CMD ["bash", "-c", "source activate myenv && python manage.py runserver 0.0.0.0:8000"]
