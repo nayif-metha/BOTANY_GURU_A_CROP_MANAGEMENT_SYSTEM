@@ -51,8 +51,9 @@
             width: 100%;
             height: auto;
             max-height: 400px; /* Limit the height */
-            object-fit: cover;
-        }
+            object-fit: contain; /* Fit the image within the container */
+    object-position: center; /* Center the image */
+    background-color: #f8f9fa4d;        }
 
         .product-title {
             font-size: 2rem;
@@ -120,6 +121,7 @@
                 <div class="col-md-6">
                     <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">
                 </div>
+                
                 <div class="col-md-6">
                     <h1 class="product-title">{{ product.name }}</h1>
                     <h5><p class="card-text">{{ product.category }}</p></h5>

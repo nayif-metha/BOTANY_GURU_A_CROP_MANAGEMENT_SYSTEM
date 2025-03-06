@@ -153,11 +153,16 @@
                         <td>{% if i.deliverstatus == 1 %}
                             DELEVER SUCCESSFULL
                         {% else %}
-                            <form method="POST" action="makedeliver">
-                                {% csrf_token %}
-                                <input type="text" value="{{i.orderid}}" name="r1" hidden="">
-                                <input type="submit" value="makedeliver">
-                            </form>
+                        {% if i.paymentstatus == 1 %}
+                        <form method="POST" action="makedeliver">
+                            {% csrf_token %}
+                            <input type="text" value="{{i.orderid}}" name="r1" hidden="">
+                            <input type="submit" value="makedeliver">
+                        </form>
+                        {% else %}
+                            
+                        {% endif %}
+                            
                         {% endif %}
                             
                         </td>
