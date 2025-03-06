@@ -10,8 +10,11 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-   
-   
+    - name: Install Python packages
+      run: |
+        pip install --upgrade pip
+        pip install -r requirements.txt
+     
 
     - name: Run Tests
       run: |
