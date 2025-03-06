@@ -16,7 +16,19 @@ jobs:
         sudo apt-get install -y wget build-essential libssl-dev libbz2-dev libreadline-dev libsqlite3-dev libffi-dev zlib1g-dev
         wget https://github.com/actions/python-versions/releases/download/3.6.13-99136/python-3.6.13-linux-20.04-x64.tar.gz
         tar -xzf python-3.6.13-linux-20.04-x64.tar.gz  # Extract the tarball
-        sudo mv python-3.6.13 /usr/local/  # Move the extracted directory
+        
+        # List the contents of the current directory to check if extraction was successful
+        ls -l
+        
+        # Check if the extracted directory exists
+        if [ -d "python-3.6.13" ]; then
+            echo "Directory python-3.6.13 exists."
+        else
+            echo "Directory python-3.6.13 does not exist."
+        fi
+
+        # Move the extracted directory if it exists
+        sudo mv python-3.6.13 /usr/local/ || echo "Failed to move python-3.6.13"
         sudo ln -s /usr/local/python-3.6.13/bin/python3 /usr/bin/python3  # Create symlink for python3
         sudo ln -s /usr/local/python-3.6.13/bin/pip3 /usr/bin/pip3  # Create symlink for pip3
 
