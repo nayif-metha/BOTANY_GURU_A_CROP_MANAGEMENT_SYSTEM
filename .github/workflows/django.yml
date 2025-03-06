@@ -30,7 +30,7 @@ jobs:
           make -j $(nproc)
           sudo make altinstall
           cd ..
-          rm -rf Python-3.6.13 Python-3.6.13.tgz
+
 
       - name: Create virtual environment
         run: |
