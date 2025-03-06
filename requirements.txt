@@ -1,11 +1,5 @@
 
 torch
-
-tornado==6.1
-traitlets==4.3.3
-txt2tags==3.7
-typed-ast==1.5.5
-typing_extensions==4.1.1
 urllib3==1.26.20
 wcwidth==0.2.13
 webencodings==0.5.1
@@ -17,3 +11,4 @@ wrapt==1.16.0
 xgboost==1.5.2
 yarg==0.1.10
 zipp==3.6.0
+razorpay
