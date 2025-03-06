@@ -41,11 +41,11 @@ def profile(request):
         a=request.session['fid']
         data=order_db.objects.filter(paymentstatus=1,customermail=a)
         data1 = registration_db.objects.get(email=a)
-        return render(request,'FARMER/profile.html',{'pro':data1,'r':data})
+        return render(request,'FARMER/profile.html',{'pro':data1,'r':data,'cities': cities})
     elif 'sid' in request.session:
         a=request.session['sid']
         data1 = registration_db.objects.get(email=a)
-        return render(request,'SHOP/profile.html',{'pro':data1})
+        return render(request,'SHOP/profile.html',{'pro':data1,'cities': cities})
     else:
         a=request.session['aid']
         data1 = registration_db.objects.get(email=a)
@@ -89,7 +89,27 @@ def addprofiledata(request):
                         data1.save()
                         msg = 'THE REGISTRATION IS COMPLETE'
                         return render(request,'MAIN/signup.html',{'msg':msg})
-          
+
+
+def updateprofile(request):
+    if request.method == 'POST':
+        a = request.POST['email']
+        b = request.POST['name']
+        c = request.POST['address']
+        d = request.POST['city']
+        e = request.POST['password0']
+        p = request.FILES['pic']
+        data = registration_db.objects.get(email=a)
+        data.name = b
+        data.address = c
+        data.city = d
+        data.profile = p
+        data.save()
+        data1 = login_db.objects.get(email=a)
+        data1.password = e
+        data1.save()
+        msg = 'THE PROFILE IS UPDATE'
+        return redirect(profile)
 
 def logindata(request):
     if request.method == 'POST':
@@ -328,16 +348,34 @@ def makedeliver(request):
 
         # Query for messages after successful updates
         # msg = registration_db.objects.filter(status=2, action=2)
-        return render(request, 'SHOP/request.html')
+        data1 = order_db.objects.all() #the upfate this to get the data from the database for particular shop
+        return render(request,'SHOP/request.html',{'r':data1})
+
 
 
 #FARMER FOLDER
 
 def home_farmer(request):
     return render(request,'FARMER/home.html')
+
+
+from .models import product_db  # Make sure to import your model
+
 def shop(request):
-    productdata=product_db.objects.all
-    return render(request,'FARMER/shop.html',{'products':productdata})
+    category = request.GET.get('category', 'all')  # Get the selected category from the request
+    
+    if category == 'all' or category is None:
+        productdata = product_db.objects.all()  # Call all() to get all products
+    else:
+        productdata = product_db.objects.filter(category=category)  # Filter products by category
+
+    return render(request, 'FARMER/shop.html', {'products': productdata, 'selected_category': category})
+# def shop(request):
+#     productdata=product_db.objects.all
+#     return render(request,'FARMER/shop.html',{'products':productdata})
+
+
+
 def shopdetails(request, product_id):
     product = product_db.objects.get(id=product_id) 
     a = request.session['fid']
@@ -404,39 +442,6 @@ def success(request):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #flask intgration
 
 from django.shortcuts import render, redirect
@@ -448,7 +453,7 @@ import io
 import torch
 from torchvision import transforms
 from PIL import Image
-from .utils import disease_dic, fertilizer_dic  # Import utility dictionaries
+from .utils import disease_dic # Import utility dictionaries
 from .models import ResNet9  # Import the ResNet9 model class
 
 # Load the disease classification model
