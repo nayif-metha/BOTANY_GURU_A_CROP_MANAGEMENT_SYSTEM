@@ -1,21 +1,47 @@
-name: CI
+name: Django CI
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Install Python packages
-      run: |
-        pip install --upgrade pip
-        pip install -r requirements.txt
-     
+      - name: Set up Python 3.6
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.6.13'
 
-    - name: Run Tests
-      run: |
-        python manage.py test
+      - name: Create virtual environment
+        run: |
+          python -m venv venv
+          echo "Virtual environment created."
+
+      - name: Activate virtual environment and install requirements
+        run: |
+          source venv/bin/activate
+          pip install -r requirements.txt
+
+      - name: Run Django migrations
+        run: |
+          source venv/bin/activate
+          python manage.py migrate
+
+      - name: Run Django tests
+        run: |
+          source venv/bin/activate
+          python manage.py test
+
+      - name: Run Django development server
+        run: |
+          source venv/bin/activate
+          python manage.py runserver 0.0.0.0:8000
