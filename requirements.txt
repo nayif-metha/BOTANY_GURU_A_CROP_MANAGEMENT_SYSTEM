@@ -1,25 +1,4 @@
 
-
-pandocfilters==1.5.1
-parso==0.7.1
-pexpect==4.9.0
-pickleshare==0.7.5
-Pillow==8.4.0
-pipreqs==0.4.11
-platformdirs==2.4.0
-prometheus-client==0.17.1
-prompt-toolkit==3.0.36
-ptyprocess==0.7.0
-pycodestyle==2.10.0
-pycparser==2.21
-pyflakes==3.0.1
-Pygments==2.14.0
-pylint==2.13.9
-pyparsing==3.1.4
-pyrsistent==0.18.0
-python-dateutil==2.9.0.post0
-pytz==2024.2
-pywin32==305
 pywinpty==1.1.6
 pyzmq==25.1.2
 qtconsole==5.2.2
