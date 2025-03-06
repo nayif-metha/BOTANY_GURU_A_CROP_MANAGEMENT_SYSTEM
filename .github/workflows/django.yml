@@ -1,4 +1,4 @@
-name: Django CI
+name: CI
 
 on:
   push:
@@ -23,14 +23,19 @@ jobs:
         run: |
           docker build -t my-django-app .
 
-      - name: Run Django migrations
+      - name: Run Docker container
         run: |
-          docker run --rm my-django-app python manage.py migrate
+          docker run -d -p 8000:8000 --name my-django-container my-django-app
 
-      - name: Run Django tests
+      - name: Wait for the server to start
         run: |
-          docker run --rm my-django-app python manage.py test
+          sleep 10  # Wait for the server to start
 
-      - name: Run Django development server
+      - name: Run tests
         run: |
-          docker run -d -p 8000:8000 my-django-app
+          docker exec my-django-container python manage.py test
+
+      - name: Stop and remove the container
+        run: |
+          docker stop my-django-container
+          docker rm my-django-container
