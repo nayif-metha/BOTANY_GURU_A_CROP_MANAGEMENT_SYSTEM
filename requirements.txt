@@ -19,7 +19,6 @@ colorama==0.4.5
 comm==0.1.4
 contextvars==2.4
 
-dataclasses==0.8
 decorator==5.1.1
 defusedxml==0.7.1
 dill==0.3.4
